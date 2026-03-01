@@ -16,7 +16,16 @@ breadcrumb:
   <div class="container">
     <div id="internes-login" style="max-width: 400px; margin: 0 auto; text-align: center;">
       <p>Dieser Bereich ist nur für angemeldete Mitglieder zugänglich.</p>
-      <div data-netlify-identity-button style="margin-top: var(--space-lg);"></div>
+      <div style="margin-top: var(--space-lg);">
+        <div style="text-align: left;">
+          <label for="int-user" style="display: block; font-weight: 600; margin-bottom: var(--space-xs);">Benutzername</label>
+          <input type="text" id="int-user" class="form-input" autocomplete="username" style="margin-bottom: var(--space-md);">
+          <label for="int-pass" style="display: block; font-weight: 600; margin-bottom: var(--space-xs);">Passwort</label>
+          <input type="password" id="int-pass" class="form-input" autocomplete="current-password" style="margin-bottom: var(--space-md);">
+        </div>
+        <p id="int-error" style="color: #e74c3c; display: none; margin-bottom: var(--space-md);">Benutzername oder Passwort falsch.</p>
+        <button id="int-login-btn" class="btn btn--primary" style="width: 100%;">Anmelden</button>
+      </div>
     </div>
 
     <div id="internes-content" style="display: none;">
@@ -35,34 +44,49 @@ breadcrumb:
   </div>
 </section>
 
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on('init', function(user) {
-      if (user) showContent();
-    });
-    window.netlifyIdentity.on('login', function() {
+  (function() {
+    var AUTH_USER = 'admin';
+    var AUTH_PASS = 'admin';
+    var SESSION_KEY = 'internes_authenticated';
+
+    var loginBox = document.getElementById('internes-login');
+    var contentBox = document.getElementById('internes-content');
+    var errorMsg = document.getElementById('int-error');
+
+    function showContent() {
+      loginBox.style.display = 'none';
+      contentBox.style.display = 'block';
+    }
+
+    function showLogin() {
+      loginBox.style.display = 'block';
+      contentBox.style.display = 'none';
+    }
+
+    if (sessionStorage.getItem(SESSION_KEY) === 'true') {
       showContent();
+    }
+
+    function tryLogin() {
+      var user = document.getElementById('int-user').value;
+      var pass = document.getElementById('int-pass').value;
+      if (user === AUTH_USER && pass === AUTH_PASS) {
+        sessionStorage.setItem(SESSION_KEY, 'true');
+        showContent();
+      } else {
+        errorMsg.style.display = 'block';
+      }
+    }
+
+    document.getElementById('int-login-btn').addEventListener('click', tryLogin);
+    document.getElementById('int-pass').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') tryLogin();
     });
-    window.netlifyIdentity.on('logout', function() {
+
+    document.getElementById('logout-btn').addEventListener('click', function() {
+      sessionStorage.removeItem(SESSION_KEY);
       showLogin();
     });
-  }
-
-  function showContent() {
-    document.getElementById('internes-login').style.display = 'none';
-    document.getElementById('internes-content').style.display = 'block';
-  }
-
-  function showLogin() {
-    document.getElementById('internes-login').style.display = 'block';
-    document.getElementById('internes-content').style.display = 'none';
-  }
-
-  var logoutBtn = document.getElementById('logout-btn');
-  if (logoutBtn) {
-    logoutBtn.addEventListener('click', function() {
-      if (window.netlifyIdentity) window.netlifyIdentity.logout();
-    });
-  }
+  })();
 </script>

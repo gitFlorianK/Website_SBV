@@ -4,9 +4,114 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CMS – Sächsischer Bogenschützenverband</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    .cms-login {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f1f3f5;
+      margin: 0;
+    }
+    .cms-login__box {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 360px;
+    }
+    .cms-login__box h1 {
+      font-size: 1.25rem;
+      margin: 0 0 1.5rem;
+      text-align: center;
+    }
+    .cms-login__box label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      font-size: 0.875rem;
+    }
+    .cms-login__box input {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    .cms-login__box button {
+      width: 100%;
+      padding: 0.625rem;
+      background: #1e8a27;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .cms-login__box button:hover {
+      background: #15661d;
+    }
+    .cms-login__error {
+      color: #e74c3c;
+      font-size: 0.875rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      display: none;
+    }
+  </style>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <div id="cms-login" class="cms-login">
+    <div class="cms-login__box">
+      <h1>CMS-Anmeldung</h1>
+      <p id="cms-error" class="cms-login__error">Benutzername oder Passwort falsch.</p>
+      <label for="cms-user">Benutzername</label>
+      <input type="text" id="cms-user" autocomplete="username">
+      <label for="cms-pass">Passwort</label>
+      <input type="password" id="cms-pass" autocomplete="current-password">
+      <button type="button" id="cms-login-btn">Anmelden</button>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var AUTH_USER = 'admin';
+      var AUTH_PASS = 'admin';
+      var SESSION_KEY = 'cms_authenticated';
+
+      function loadCMS() {
+        document.getElementById('cms-login').style.display = 'none';
+        var s = document.createElement('script');
+        s.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+        document.body.appendChild(s);
+      }
+
+      if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+        loadCMS();
+        return;
+      }
+
+      function tryLogin() {
+        var user = document.getElementById('cms-user').value;
+        var pass = document.getElementById('cms-pass').value;
+        if (user === AUTH_USER && pass === AUTH_PASS) {
+          sessionStorage.setItem(SESSION_KEY, 'true');
+          loadCMS();
+        } else {
+          document.getElementById('cms-error').style.display = 'block';
+        }
+      }
+
+      document.getElementById('cms-login-btn').addEventListener('click', tryLogin);
+      document.getElementById('cms-pass').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') tryLogin();
+      });
+    })();
+  </script>
 </body>
 </html>
