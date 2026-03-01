@@ -287,6 +287,11 @@
   margin-top: var(--space-xs);
 }
 
+/* Dark mode: footer titles readable on light gray background */
+[data-theme="dark"] .footer__title {
+  color: #1a1a2e;
+}
+
 .footer__bottom {
   margin-top: var(--space-xl);
   padding-top: var(--space-lg);

@@ -227,6 +227,22 @@
   }
 }
 
+/* Dark mode: text on green backgrounds uses dark blue */
+[data-theme="dark"] .hero,
+[data-theme="dark"] .hero__subtitle {
+  color: #1a1a2e;
+}
+
+[data-theme="dark"] .hero .btn--outline {
+  border-color: #1a1a2e;
+  color: #1a1a2e;
+}
+
+[data-theme="dark"] .hero .btn--outline:hover {
+  background-color: #1a1a2e;
+  color: var(--color-white);
+}
+
 /* Form elements */
 .form-group {
   margin-bottom: var(--space-lg);

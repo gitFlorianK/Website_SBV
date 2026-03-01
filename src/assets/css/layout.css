@@ -93,6 +93,11 @@
   margin-top: var(--space-sm);
 }
 
+/* Dark mode: page header text on green background uses dark blue */
+[data-theme="dark"] .page-header {
+  color: #1a1a2e;
+}
+
 /* Breadcrumb */
 .breadcrumb {
   padding: var(--space-md) 0;

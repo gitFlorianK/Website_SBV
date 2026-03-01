@@ -14,9 +14,21 @@ Offizielle Website des Sächsischen Bogenschützenverbands e.V.
 
 ```bash
 npm install
-npm run dev       # Lokaler Entwicklungsserver
+npm run dev       # Lokaler Entwicklungsserver (http://localhost:8080)
 npm run build     # Produktions-Build → _site/
+npm run clean     # Build-Output löschen
 ```
+
+### CMS lokal nutzen
+
+Damit das Decap CMS lokal auf Dateien zugreifen kann, muss zusätzlich der Decap-Proxy-Server laufen:
+
+```bash
+npm run cms       # Startet nur den CMS-Proxy-Server (Port 8081)
+npm run dev:cms   # Startet Website + CMS-Proxy gleichzeitig
+```
+
+Das CMS ist dann unter http://localhost:8080/admin/ erreichbar.
 
 ## Projektstruktur
 
@@ -30,7 +42,8 @@ npm run build     # Produktions-Build → _site/
 
 ## CMS
 
-Das CMS ist unter `/admin/` erreichbar (nach Netlify-Deployment).
+- **Lokal:** http://localhost:8080/admin/ (mit `npm run dev:cms`)
+- **Produktion:** `/admin/` (nach Netlify-Deployment)
 
 ## Branches
 
