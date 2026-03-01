@@ -1,0 +1,58 @@
+---
+layout: layouts/base.njk
+title: Vereine
+permalink: /vereine/
+breadcrumb:
+  - label: Vereine
+---
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">Vereine</h1>
+    <p class="page-header__subtitle">39 Bogensportvereine im Sächsischen Bogenschützenverband</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="filter-bar">
+      <input type="text" class="form-input" id="club-search" placeholder="Verein oder Ort suchen…" aria-label="Vereine durchsuchen">
+      <select class="form-select" id="club-discipline-filter" aria-label="Nach Disziplin filtern">
+        <option value="">Alle Disziplinen</option>
+        <option value="Recurve">Recurve</option>
+        <option value="Compound">Compound</option>
+        <option value="Blankbogen">Blankbogen</option>
+        <option value="Langbogen">Langbogen</option>
+        <option value="3D">3D</option>
+        <option value="Feld">Feld</option>
+      </select>
+    </div>
+
+    <div class="grid grid--3" id="clubs-grid">
+      {% for club in collections.clubs %}
+      <div class="card" data-city="{{ club.data.city }}" data-disciplines="{{ club.data.disciplines | join(',') if club.data.disciplines else '' }}">
+        <div class="card__body">
+          <h2 class="card__title">{{ club.data.title }}</h2>
+          <p class="card__meta">{{ club.data.city }}{% if club.data.zip %} ({{ club.data.zip }}){% endif %}</p>
+          {% if club.data.disciplines %}
+          <p>
+            {% for d in club.data.disciplines %}
+            <span class="badge">{{ d }}</span>
+            {% endfor %}
+          </p>
+          {% endif %}
+          {% if club.data.website %}
+          <p><a href="{{ club.data.website }}" target="_blank" rel="noopener" class="card__link">Website →</a></p>
+          {% endif %}
+          {% if club.data.email %}
+          <p class="card__meta"><a href="mailto:{{ club.data.email }}">{{ club.data.email }}</a></p>
+          {% endif %}
+        </div>
+      </div>
+      {% else %}
+      <p>Vereinsdaten werden in Kürze eingepflegt.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script src="/assets/js/club-filter.js" defer></script>

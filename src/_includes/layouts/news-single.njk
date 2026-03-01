@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+---
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">{{ title }}</h1>
+    <p class="page-header__subtitle">{{ date | dateFormat }}{% if category %} · {{ category }}{% endif %}</p>
+  </div>
+</div>
+
+{% include "partials/breadcrumb.njk" %}
+
+<section class="section">
+  <div class="container">
+    <article class="content">
+      {{ content | safe }}
+    </article>
+    <p style="margin-top: var(--space-xl);">
+      <a href="/aktuelles/" class="btn btn--outline">← Zurück zu Aktuelles</a>
+    </p>
+  </div>
+</section>

@@ -1,0 +1,78 @@
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+a {
+  color: var(--color-link);
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--color-link-hover);
+}
+
+h1 {
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--space-lg);
+}
+
+h2 {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--space-md);
+}
+
+h3 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-sm);
+}
+
+h4 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-sm);
+}
+
+p + p {
+  margin-top: var(--space-md);
+}
+
+.content p,
+.content ul,
+.content ol {
+  margin-bottom: var(--space-md);
+}
+
+.content ul,
+.content ol {
+  padding-left: var(--space-xl);
+}
+
+.content ul {
+  list-style: disc;
+}
+
+.content ol {
+  list-style: decimal;
+}
+
+.content a {
+  text-decoration: underline;
+}
+
+img {
+  border-radius: var(--border-radius);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: var(--space-xl) 0;
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}

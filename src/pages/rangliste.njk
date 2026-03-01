@@ -1,0 +1,33 @@
+---
+layout: layouts/base.njk
+title: Rangliste
+permalink: /rangliste/
+breadcrumb:
+  - label: Rangliste
+---
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">Rangliste</h1>
+    <p class="page-header__subtitle">Landesrangliste Sachsen – Bogensport</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <p>Die aktuellen Ranglisten stehen als PDF-Download zur Verfügung.</p>
+
+    <div style="margin-top: var(--space-xl);">
+      {% for ranking in collections.rankings %}
+      <a href="{{ ranking.data.file }}" target="_blank" rel="noopener" class="doc-item" style="margin-bottom: var(--space-md);">
+        <div class="doc-item__icon">PDF</div>
+        <div class="doc-item__info">
+          <p class="doc-item__title">{{ ranking.data.title }}</p>
+          <p class="doc-item__meta">{{ ranking.date | dateFormat }}{% if ranking.data.discipline %} · {{ ranking.data.discipline }}{% endif %} · Saison {{ ranking.data.season }}</p>
+        </div>
+      </a>
+      {% else %}
+      <p>Die Ranglisten werden in Kürze veröffentlicht.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>

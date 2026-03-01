@@ -1,0 +1,142 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "src/uploads"
+public_folder: "/uploads"
+
+locale: "de"
+
+collections:
+  - name: "news"
+    label: "Neuigkeiten"
+    folder: "src/content/news"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Titel", name: "title", widget: "string" }
+      - { label: "Datum", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - label: "Kategorie"
+        name: "category"
+        widget: "select"
+        options:
+          - "Verband"
+          - "Wettkampf"
+          - "Ergebnis"
+          - "Termin"
+          - "Sonstiges"
+      - { label: "Bild", name: "image", widget: "image", required: false }
+      - { label: "Inhalt", name: "body", widget: "markdown" }
+
+  - name: "clubs"
+    label: "Vereine"
+    folder: "src/content/clubs"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Vereinsname", name: "title", widget: "string" }
+      - { label: "Ort", name: "city", widget: "string" }
+      - { label: "Postleitzahl", name: "zip", widget: "string", required: false }
+      - { label: "Webseite", name: "website", widget: "string", required: false }
+      - { label: "E-Mail", name: "email", widget: "string", required: false }
+      - label: "Disziplinen"
+        name: "disciplines"
+        widget: "select"
+        multiple: true
+        options:
+          - "Recurve"
+          - "Compound"
+          - "Blankbogen"
+          - "Langbogen"
+          - "3D"
+          - "Feld"
+          - "FITA"
+        required: false
+      - { label: "Logo", name: "logo", widget: "image", required: false }
+      - { label: "Beschreibung", name: "body", widget: "markdown", required: false }
+
+  - name: "board"
+    label: "Vorstand"
+    folder: "src/content/board"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "title", widget: "string" }
+      - { label: "Funktion", name: "role", widget: "string" }
+      - { label: "Reihenfolge", name: "order", widget: "number", value_type: "int", min: 1, max: 99 }
+      - { label: "E-Mail", name: "email", widget: "string", required: false }
+      - { label: "Telefon", name: "phone", widget: "string", required: false }
+      - { label: "Foto", name: "image", widget: "image", required: false }
+      - { label: "Beschreibung", name: "body", widget: "markdown", required: false }
+
+  - name: "documents"
+    label: "Dokumente"
+    folder: "src/content/documents"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Titel", name: "title", widget: "string" }
+      - { label: "Datum", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - label: "Kategorie"
+        name: "category"
+        widget: "select"
+        options:
+          - "Ordnung"
+          - "Formular"
+          - "Ausschreibung"
+          - "Ergebnis"
+          - "Protokoll"
+          - "Rangliste"
+          - "Rekord"
+          - "Sonstiges"
+      - label: "Saison"
+        name: "season"
+        widget: "string"
+        required: false
+      - { label: "PDF-Datei", name: "file", widget: "file" }
+      - { label: "Beschreibung", name: "body", widget: "markdown", required: false }
+
+  - name: "rankings"
+    label: "Ranglisten"
+    folder: "src/content/rankings"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Titel", name: "title", widget: "string" }
+      - { label: "Datum", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - label: "Disziplin"
+        name: "discipline"
+        widget: "string"
+        required: false
+      - label: "Saison"
+        name: "season"
+        widget: "string"
+      - { label: "PDF-Datei", name: "file", widget: "file" }
+      - { label: "Beschreibung", name: "body", widget: "markdown", required: false }
+
+  - name: "records"
+    label: "Rekorde"
+    folder: "src/content/records"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Titel", name: "title", widget: "string" }
+      - label: "Disziplin"
+        name: "discipline"
+        widget: "string"
+      - label: "Bogenklasse"
+        name: "bowclass"
+        widget: "string"
+        required: false
+      - { label: "PDF-Datei", name: "file", widget: "file", required: false }
+      - { label: "Inhalt", name: "body", widget: "markdown", required: false }
+
+  - name: "pages"
+    label: "Seiten"
+    folder: "src/content/pages"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Titel", name: "title", widget: "string" }
+      - { label: "Permalink", name: "permalink", widget: "string", required: false }
+      - { label: "Inhalt", name: "body", widget: "markdown" }

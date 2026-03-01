@@ -1,0 +1,47 @@
+---
+layout: layouts/base.njk
+title: Ergebnisse
+permalink: /wettkampf/ergebnisse/
+breadcrumb:
+  - label: Wettkampf
+    url: "#"
+  - label: Ergebnisse
+---
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">Ergebnisse</h1>
+    <p class="page-header__subtitle">Wettkampfergebnisse und Auswertungen</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="filter-bar">
+      <select class="form-select" id="result-season-filter" aria-label="Nach Saison filtern">
+        <option value="">Alle Saisons</option>
+        <option value="2025/2026">2025/2026</option>
+        <option value="2024/2025">2024/2025</option>
+        <option value="2023/2024">2023/2024</option>
+      </select>
+    </div>
+
+    <div id="results-list">
+      {% set ergebnisse = collections.documents | filterByCategory("Ergebnis") %}
+      {% if ergebnisse.length > 0 %}
+        {% for doc in ergebnisse %}
+        <a href="{{ doc.data.file }}" target="_blank" rel="noopener" class="doc-item" data-season="{{ doc.data.season }}" style="margin-bottom: var(--space-md);">
+          <div class="doc-item__icon">PDF</div>
+          <div class="doc-item__info">
+            <p class="doc-item__title">{{ doc.data.title }}</p>
+            <p class="doc-item__meta">{{ doc.date | dateFormat }}{% if doc.data.season %} · Saison {{ doc.data.season }}{% endif %}</p>
+          </div>
+        </a>
+        {% endfor %}
+      {% else %}
+      <p>Noch keine Ergebnisse vorhanden.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<script src="/assets/js/document-filter.js" defer></script>

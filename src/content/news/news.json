@@ -1,0 +1,9 @@
+{
+  "layout": "layouts/news-single.njk",
+  "tags": "news",
+  "permalink": "/aktuelles/{{ page.fileSlug }}/",
+  "breadcrumb": [
+    { "label": "Aktuelles", "url": "/aktuelles/" },
+    { "label": "{{ title }}" }
+  ]
+}

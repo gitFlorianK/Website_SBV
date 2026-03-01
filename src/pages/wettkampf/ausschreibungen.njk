@@ -1,0 +1,34 @@
+---
+layout: layouts/base.njk
+title: Ausschreibungen
+permalink: /wettkampf/ausschreibungen/
+breadcrumb:
+  - label: Wettkampf
+    url: "#"
+  - label: Ausschreibungen
+---
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">Ausschreibungen</h1>
+    <p class="page-header__subtitle">Aktuelle Wettkampf-Ausschreibungen</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    {% set ausschreibungen = collections.documents | filterByCategory("Ausschreibung") %}
+    {% if ausschreibungen.length > 0 %}
+      {% for doc in ausschreibungen %}
+      <a href="{{ doc.data.file }}" target="_blank" rel="noopener" class="doc-item" style="margin-bottom: var(--space-md);">
+        <div class="doc-item__icon">PDF</div>
+        <div class="doc-item__info">
+          <p class="doc-item__title">{{ doc.data.title }}</p>
+          <p class="doc-item__meta">{{ doc.date | dateFormat }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    {% else %}
+    <p>Derzeit liegen keine Ausschreibungen vor.</p>
+    {% endif %}
+  </div>
+</section>

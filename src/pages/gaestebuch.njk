@@ -1,0 +1,51 @@
+---
+layout: layouts/base.njk
+title: Gästebuch
+permalink: /gaestebuch/
+breadcrumb:
+  - label: Gästebuch
+---
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">Gästebuch</h1>
+    <p class="page-header__subtitle">Hinterlassen Sie uns einen Eintrag</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <h2>Neuer Eintrag</h2>
+    <form id="guestbook-form" action="/.netlify/functions/guestbook" method="POST" novalidate>
+      <div class="grid grid--2">
+        <div class="form-group">
+          <label class="form-label" for="gb-name">Name *</label>
+          <input type="text" class="form-input" id="gb-name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="gb-city">Ort</label>
+          <input type="text" class="form-input" id="gb-city" name="city">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="gb-message">Nachricht *</label>
+        <textarea class="form-textarea" id="gb-message" name="message" required></textarea>
+      </div>
+      {# Honeypot #}
+      <div style="position: absolute; left: -9999px;" aria-hidden="true">
+        <label for="gb-website">Website</label>
+        <input type="text" id="gb-website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+      <button type="submit" class="btn btn--primary">Eintrag senden</button>
+      <div id="guestbook-status" aria-live="polite" style="margin-top: var(--space-md);"></div>
+    </form>
+
+    <hr>
+
+    <h2>Einträge</h2>
+    <div id="guestbook-entries">
+      <p>Einträge werden geladen…</p>
+    </div>
+  </div>
+</section>
+
+<script src="/assets/js/guestbook.js" defer></script>

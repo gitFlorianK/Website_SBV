@@ -1,0 +1,68 @@
+---
+layout: layouts/base.njk
+title: Interner Bereich
+permalink: /internes/
+breadcrumb:
+  - label: Internes
+---
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">Interner Bereich</h1>
+    <p class="page-header__subtitle">Nur für Mitglieder des SBV</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div id="internes-login" style="max-width: 400px; margin: 0 auto; text-align: center;">
+      <p>Dieser Bereich ist nur für angemeldete Mitglieder zugänglich.</p>
+      <div data-netlify-identity-button style="margin-top: var(--space-lg);"></div>
+    </div>
+
+    <div id="internes-content" style="display: none;">
+      <h2>Willkommen im internen Bereich</h2>
+      <p>Hier finden Sie interne Dokumente und Informationen für Vereinsvertreter.</p>
+
+      <div style="margin-top: var(--space-xl);">
+        <h3>Interne Dokumente</h3>
+        <p>Interne Dokumente werden hier nach Anmeldung bereitgestellt.</p>
+      </div>
+
+      <p style="margin-top: var(--space-xl);">
+        <button id="logout-btn" class="btn btn--outline">Abmelden</button>
+      </p>
+    </div>
+  </div>
+</section>
+
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on('init', function(user) {
+      if (user) showContent();
+    });
+    window.netlifyIdentity.on('login', function() {
+      showContent();
+    });
+    window.netlifyIdentity.on('logout', function() {
+      showLogin();
+    });
+  }
+
+  function showContent() {
+    document.getElementById('internes-login').style.display = 'none';
+    document.getElementById('internes-content').style.display = 'block';
+  }
+
+  function showLogin() {
+    document.getElementById('internes-login').style.display = 'block';
+    document.getElementById('internes-content').style.display = 'none';
+  }
+
+  var logoutBtn = document.getElementById('logout-btn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', function() {
+      if (window.netlifyIdentity) window.netlifyIdentity.logout();
+    });
+  }
+</script>

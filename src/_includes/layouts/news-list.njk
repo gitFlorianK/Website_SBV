@@ -1,0 +1,36 @@
+---
+layout: layouts/base.njk
+---
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">{{ title }}</h1>
+    {% if subtitle %}
+    <p class="page-header__subtitle">{{ subtitle }}</p>
+    {% endif %}
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    {% set newsList = collections.news %}
+    {% if newsList.length > 0 %}
+    <div class="grid grid--3">
+      {% for post in newsList %}
+      <article class="card">
+        {% if post.data.image %}
+        <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="card__image">
+        {% endif %}
+        <div class="card__body">
+          <span class="card__meta">{{ post.date | dateFormat }}{% if post.data.category %} · {{ post.data.category }}{% endif %}</span>
+          <h2 class="card__title">{{ post.data.title }}</h2>
+          <p class="card__text">{{ post.content | excerpt }}</p>
+          <a href="{{ post.url }}" class="card__link">Weiterlesen →</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p>Derzeit sind keine Neuigkeiten vorhanden.</p>
+    {% endif %}
+  </div>
+</section>

@@ -1,0 +1,39 @@
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="/" class="site-logo" aria-label="Startseite">
+      <div class="site-logo__text">
+        <span class="site-logo__abbr">SBV</span>
+        <span class="site-logo__full">Sächsischer Bogenschützenverband</span>
+      </div>
+    </a>
+
+    <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menü öffnen">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+
+    <nav class="main-nav" id="main-nav" aria-label="Hauptnavigation">
+      <ul class="main-nav__list">
+        {% for item in navigation.main %}
+        <li class="main-nav__item">
+          {% if item.children %}
+          <a href="{{ item.url }}" class="main-nav__link main-nav__link--has-children{% if page.url == item.url %} main-nav__link--active{% endif %}" aria-haspopup="true" aria-expanded="false">
+            {{ item.label }}
+          </a>
+          <ul class="dropdown" role="menu">
+            {% for child in item.children %}
+            <li>
+              <a href="{{ child.url }}" class="main-nav__link{% if page.url == child.url %} main-nav__link--active{% endif %}" role="menuitem">{{ child.label }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <a href="{{ item.url }}" class="main-nav__link{% if page.url == item.url %} main-nav__link--active{% endif %}">{{ item.label }}</a>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+</header>

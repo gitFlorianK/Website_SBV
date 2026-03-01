@@ -1,0 +1,36 @@
+---
+layout: layouts/base.njk
+title: Vorstand
+permalink: /vorstand/
+breadcrumb:
+  - label: Vorstand
+---
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">Vorstand</h1>
+    <p class="page-header__subtitle">Der Vorstand des Sächsischen Bogenschützenverbands e.V.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid--3">
+      {% for member in collections.board %}
+      <div class="card person-card">
+        {% if member.data.image %}
+        <img src="{{ member.data.image }}" alt="{{ member.data.title }}" class="person-card__image">
+        {% else %}
+        <div class="person-card__image" style="background-color: var(--color-gray-200); display: flex; align-items: center; justify-content: center; font-size: var(--font-size-2xl); color: var(--color-gray-500);">{{ member.data.title | first }}</div>
+        {% endif %}
+        <p class="person-card__name">{{ member.data.title }}</p>
+        <p class="person-card__role">{{ member.data.role }}</p>
+        {% if member.data.email %}
+        <p class="person-card__contact"><a href="mailto:{{ member.data.email }}">{{ member.data.email }}</a></p>
+        {% endif %}
+      </div>
+      {% else %}
+      <p>Vorstandsdaten werden in Kürze eingepflegt.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,59 @@
+{
+  "main": [
+    {
+      "label": "Startseite",
+      "url": "/"
+    },
+    {
+      "label": "Aktuelles",
+      "url": "/aktuelles/"
+    },
+    {
+      "label": "Wettkampf",
+      "url": "#",
+      "children": [
+        { "label": "Kalender", "url": "/wettkampf/kalender/" },
+        { "label": "Ausschreibungen", "url": "/wettkampf/ausschreibungen/" },
+        { "label": "Ergebnisse", "url": "/wettkampf/ergebnisse/" }
+      ]
+    },
+    {
+      "label": "Rangliste",
+      "url": "/rangliste/"
+    },
+    {
+      "label": "Rekorde",
+      "url": "/rekorde/"
+    },
+    {
+      "label": "Vereine",
+      "url": "/vereine/"
+    },
+    {
+      "label": "Vorstand",
+      "url": "/vorstand/"
+    },
+    {
+      "label": "Dokumente",
+      "url": "/dokumente/"
+    },
+    {
+      "label": "Kontakt",
+      "url": "/kontakt/"
+    },
+    {
+      "label": "Mehr",
+      "url": "#",
+      "children": [
+        { "label": "Gästebuch", "url": "/gaestebuch/" },
+        { "label": "Links", "url": "/links/" },
+        { "label": "Impressum", "url": "/impressum/" }
+      ]
+    }
+  ],
+  "footer": [
+    { "label": "Impressum", "url": "/impressum/" },
+    { "label": "Datenschutz", "url": "/impressum/#datenschutz" },
+    { "label": "Kontakt", "url": "/kontakt/" }
+  ]
+}

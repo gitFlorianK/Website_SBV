@@ -1,0 +1,95 @@
+---
+layout: layouts/base.njk
+title: ""
+---
+{# Hero Section #}
+<section class="hero">
+  <div class="container">
+    <h1 class="hero__title">Sächsischer Bogenschützenverband e.V.</h1>
+    <p class="hero__subtitle">Der Dachverband für Bogensport in Sachsen – Wettkämpfe, Vereine und Gemeinschaft seit über 30 Jahren.</p>
+    <div class="hero__actions">
+      <a href="/aktuelles/" class="btn btn--accent">Aktuelles</a>
+      <a href="/vereine/" class="btn btn--outline" style="border-color: #fff; color: #fff;">Vereine finden</a>
+    </div>
+  </div>
+</section>
+
+{# Latest News #}
+<section class="section">
+  <div class="container">
+    <h2 class="section__title">Neuigkeiten</h2>
+    <div class="grid grid--3">
+      {% set latestNews = collections.news | limit(3) %}
+      {% if latestNews.length > 0 %}
+        {% for post in latestNews %}
+        <article class="card">
+          <div class="card__body">
+            <span class="card__meta">{{ post.date | dateFormat }}{% if post.data.category %} · {{ post.data.category }}{% endif %}</span>
+            <h3 class="card__title">{{ post.data.title }}</h3>
+            <p class="card__text">{{ post.content | excerpt }}</p>
+            <a href="{{ post.url }}" class="card__link">Weiterlesen →</a>
+          </div>
+        </article>
+        {% endfor %}
+      {% else %}
+        <article class="card">
+          <div class="card__body">
+            <span class="card__meta">01.03.2026</span>
+            <h3 class="card__title">Willkommen auf der neuen Website</h3>
+            <p class="card__text">Die Website des Sächsischen Bogenschützenverbands wurde neu gestaltet. Hier finden Sie in Kürze alle aktuellen Informationen.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card__body">
+            <span class="card__meta">01.03.2026</span>
+            <h3 class="card__title">Saison 2026 – Termine</h3>
+            <p class="card__text">Die Wettkampftermine für die Saison 2026 werden in Kürze veröffentlicht. Schauen Sie regelmäßig im Wettkampfkalender vorbei.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card__body">
+            <span class="card__meta">01.03.2026</span>
+            <h3 class="card__title">Vereine in Sachsen</h3>
+            <p class="card__text">Finden Sie einen Bogensportverein in Ihrer Nähe. Aktuell sind 39 Vereine im Sächsischen Bogenschützenverband organisiert.</p>
+          </div>
+        </article>
+      {% endif %}
+    </div>
+    <p style="text-align: center; margin-top: var(--space-xl);">
+      <a href="/aktuelles/" class="btn btn--outline">Alle Neuigkeiten →</a>
+    </p>
+  </div>
+</section>
+
+{# Quick Links #}
+<section class="section section--alt">
+  <div class="container">
+    <h2 class="section__title">Schnellzugriff</h2>
+    <div class="grid grid--4">
+      <a href="/wettkampf/kalender/" class="card">
+        <div class="card__body" style="text-align: center;">
+          <h3 class="card__title">Wettkampfkalender</h3>
+          <p class="card__text">Alle Termine und Veranstaltungen im Überblick</p>
+        </div>
+      </a>
+      <a href="/wettkampf/ergebnisse/" class="card">
+        <div class="card__body" style="text-align: center;">
+          <h3 class="card__title">Ergebnisse</h3>
+          <p class="card__text">Aktuelle Wettkampfergebnisse und Auswertungen</p>
+        </div>
+      </a>
+      <a href="/rangliste/" class="card">
+        <div class="card__body" style="text-align: center;">
+          <h3 class="card__title">Rangliste</h3>
+          <p class="card__text">Aktuelle Landesrangliste Sachsen</p>
+        </div>
+      </a>
+      <a href="/dokumente/" class="card">
+        <div class="card__body" style="text-align: center;">
+          <h3 class="card__title">Dokumente</h3>
+          <p class="card__text">Downloads, Formulare und Ordnungen</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,38 @@
+---
+layout: layouts/base.njk
+title: Wettkampfkalender
+permalink: /wettkampf/kalender/
+breadcrumb:
+  - label: Wettkampf
+    url: "#"
+  - label: Kalender
+---
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">Wettkampfkalender</h1>
+    <p class="page-header__subtitle">Alle Termine und Veranstaltungen im Überblick</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <p>Der aktuelle Wettkampfkalender steht als PDF-Download zur Verfügung.</p>
+
+    <div style="margin-top: var(--space-xl);">
+      {% set kalenderDocs = collections.documents | filterByCategory("Ausschreibung") %}
+      {% if kalenderDocs.length > 0 %}
+        {% for doc in kalenderDocs %}
+        <a href="{{ doc.data.file }}" target="_blank" rel="noopener" class="doc-item" style="margin-bottom: var(--space-md);">
+          <div class="doc-item__icon">PDF</div>
+          <div class="doc-item__info">
+            <p class="doc-item__title">{{ doc.data.title }}</p>
+            <p class="doc-item__meta">{{ doc.date | dateFormat }}</p>
+          </div>
+        </a>
+        {% endfor %}
+      {% else %}
+      <p>Der Wettkampfkalender für die aktuelle Saison wird in Kürze veröffentlicht.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>

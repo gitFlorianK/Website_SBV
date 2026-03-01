@@ -1,0 +1,52 @@
+---
+layout: layouts/base.njk
+title: Rekorde
+permalink: /rekorde/
+breadcrumb:
+  - label: Rekorde
+---
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">Rekorde</h1>
+    <p class="page-header__subtitle">Sächsische Landesrekorde im Bogensport</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <p>Übersicht der sächsischen Landesrekorde nach Disziplin.</p>
+
+    <div style="margin-top: var(--space-xl);">
+      {% for record in collections.records %}
+      <div class="accordion__item">
+        <button class="accordion__trigger" aria-expanded="false" aria-controls="record-{{ loop.index }}">
+          {{ record.data.title }}{% if record.data.discipline %} – {{ record.data.discipline }}{% endif %}
+        </button>
+        <div class="accordion__content" id="record-{{ loop.index }}" aria-hidden="true">
+          {% if record.content %}
+          <div class="content">{{ record.content | safe }}</div>
+          {% endif %}
+          {% if record.data.file %}
+          <p><a href="{{ record.data.file }}" target="_blank" rel="noopener" class="btn btn--sm btn--outline">PDF herunterladen</a></p>
+          {% endif %}
+        </div>
+      </div>
+      {% else %}
+      <p>Die Rekordlisten werden in Kürze veröffentlicht.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.accordion__trigger').forEach(function(trigger) {
+    trigger.addEventListener('click', function() {
+      var expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded);
+      var content = this.nextElementSibling;
+      content.setAttribute('aria-hidden', expanded);
+    });
+  });
+});
+</script>

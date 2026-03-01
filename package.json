@@ -1,0 +1,14 @@
+{
+  "name": "website-sbv",
+  "version": "1.0.0",
+  "description": "Website des Sächsischen Bogenschützenverbands e.V.",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy",
+    "clean": "rm -rf _site"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  },
+  "devDependencies": {}
+}

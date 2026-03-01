@@ -1,0 +1,46 @@
+---
+layout: layouts/base.njk
+title: Dokumente
+permalink: /dokumente/
+breadcrumb:
+  - label: Dokumente
+---
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">Dokumente</h1>
+    <p class="page-header__subtitle">Downloads, Formulare und Ordnungen</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="filter-bar">
+      <input type="text" class="form-input" id="doc-search" placeholder="Dokument suchen…" aria-label="Dokumente durchsuchen">
+      <select class="form-select" id="doc-category-filter" aria-label="Nach Kategorie filtern">
+        <option value="">Alle Kategorien</option>
+        <option value="Ordnung">Ordnungen</option>
+        <option value="Formular">Formulare</option>
+        <option value="Ausschreibung">Ausschreibungen</option>
+        <option value="Ergebnis">Ergebnisse</option>
+        <option value="Protokoll">Protokolle</option>
+        <option value="Sonstiges">Sonstiges</option>
+      </select>
+    </div>
+
+    <div id="documents-list">
+      {% for doc in collections.documents %}
+      <a href="{{ doc.data.file }}" target="_blank" rel="noopener" class="doc-item" data-category="{{ doc.data.category }}" data-title="{{ doc.data.title | lower }}">
+        <div class="doc-item__icon">PDF</div>
+        <div class="doc-item__info">
+          <p class="doc-item__title">{{ doc.data.title }}</p>
+          <p class="doc-item__meta">{{ doc.date | dateFormat }} · {{ doc.data.category }}</p>
+        </div>
+      </a>
+      {% else %}
+      <p>Noch keine Dokumente vorhanden.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script src="/assets/js/document-filter.js" defer></script>
