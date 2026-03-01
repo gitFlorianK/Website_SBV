@@ -13,6 +13,15 @@
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
   <meta property="og:locale" content="de_DE">
 
+  <!-- Theme: prevent flash of wrong theme -->
+  <script>
+    (function() {
+      var t = localStorage.getItem('theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
   <!-- CSS -->
   <link rel="stylesheet" href="/assets/css/main.css">
 
@@ -33,5 +42,6 @@
   </div>
 
   <script src="/assets/js/navigation.js" defer></script>
+  <script src="/assets/js/theme-toggle.js" defer></script>
 </body>
 </html>
