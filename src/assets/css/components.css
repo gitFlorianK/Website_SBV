@@ -52,8 +52,10 @@
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-sm);
   padding: var(--space-sm) var(--space-lg);
+  min-height: 44px;
   border: 2px solid transparent;
   border-radius: var(--border-radius);
   font-size: var(--font-size-base);
@@ -186,17 +188,17 @@
 .hero {
   background-color: var(--color-primary);
   color: var(--color-white);
-  padding: var(--space-3xl) 0;
+  padding: var(--space-xl) 0;
   text-align: center;
 }
 
 .hero__title {
-  font-size: var(--font-size-4xl);
+  font-size: var(--font-size-2xl);
   margin-bottom: var(--space-md);
 }
 
 .hero__subtitle {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-base);
   opacity: 0.9;
   margin-bottom: var(--space-xl);
   max-width: 600px;
@@ -219,6 +221,10 @@
   .hero__title {
     font-size: 3rem;
   }
+
+  .hero__subtitle {
+    font-size: var(--font-size-xl);
+  }
 }
 
 /* Form elements */
@@ -237,9 +243,10 @@
 .form-select {
   width: 100%;
   padding: var(--space-sm) var(--space-md);
+  min-height: 44px;
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
-  font-size: var(--font-size-base);
+  font-size: 16px; /* Prevents iOS zoom on focus */
   transition: border-color var(--transition);
 }
 
@@ -296,15 +303,27 @@
 /* Filter bar */
 .filter-bar {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: var(--space-sm);
   margin-bottom: var(--space-xl);
 }
 
 .filter-bar .form-select,
 .filter-bar .form-input {
-  width: auto;
-  min-width: 200px;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .filter-bar {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .filter-bar .form-select,
+  .filter-bar .form-input {
+    width: auto;
+    min-width: 200px;
+  }
 }
 
 /* Person card (for Vorstand) */

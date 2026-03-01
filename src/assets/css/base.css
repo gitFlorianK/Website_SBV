@@ -16,18 +16,32 @@ a:hover {
 }
 
 h1 {
-  font-size: var(--font-size-4xl);
+  font-size: var(--font-size-2xl);
   margin-bottom: var(--space-lg);
 }
 
 h2 {
-  font-size: var(--font-size-3xl);
+  font-size: var(--font-size-xl);
   margin-bottom: var(--space-md);
 }
 
 h3 {
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-lg);
   margin-bottom: var(--space-sm);
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: var(--font-size-4xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-3xl);
+  }
+
+  h3 {
+    font-size: var(--font-size-2xl);
+  }
 }
 
 h4 {
